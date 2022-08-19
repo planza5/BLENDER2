@@ -1,0 +1,131 @@
+import bpy
+import imp
+import bmesh
+from bezierpab import Point
+from bezierpab import Utils
+
+    
+MAX_DISTANCE=10
+FINAL_COPY_DISPLACE=50   
+points=[]  
+    
+class MeshesUtils:
+    _mesh=None
+    _obj=None
+    _bmesh=None
+    
+    def createMesh(self,name):
+        _mesh = bpy.data.meshes.new(name+"-mesh") 
+        _obj = bpy.data.objects.new(name+"-obj", _mesh)
+        
+        bpy.context.scene.objects.link(_obj)
+        bpy.context.scene.objects.active = _obj
+
+        
+        self._mesh = bpy.context.object.data
+        self._bmesh = bmesh.new()
+        
+    def createVertex(self,vertex):  
+        return self._bmesh.verts.new((vertex.x,vertex.y+FINAL_COPY_DISPLACE,vertex.z))
+
+    def createEdge(self,p1,p2):
+        return self._bmesh.edges.new((p1,p2))
+    
+    def persistMesh(self,mesh):
+        self._bmesh.to_mesh(mesh)  
+        self._bmesh.free()
+        
+    def draw(self, points,name, close):
+        self.createMesh(name)
+        v1=None
+        
+        for i in range(len(points)):
+            v2=self.createVertex(points[i])
+            
+            if v1!=None:
+                self.createEdge(v1,v2)        
+    
+            v1=v2
+        
+        if close:
+            self._bmesh.verts.ensure_lookup_table()
+            vert1=self._bmesh.verts[len(points)-1]
+            vert2=self._bmesh.verts[0]            
+            self.createEdge(vert1,vert2)  
+          
+        self.persistMesh(self._mesh) 
+  
+
+'''
+'''    
+'''
+'''
+'''
+'''    
+
+ 
+   
+def toCSharp(name):
+    for p in points:
+        print(name+".Add(new Vector3({:f}f,{:f}f,{:f}f));".format(p.x,-1*p.z,p.y))
+
+def processCurve(curve):
+    bpy.context.scene.objects.active = curve
+    bpy.ops.object.transform_apply(location = True, scale = True, rotation = True)
+    
+    for i in range(len(curve.data.splines)):       
+        spline=curve.data.splines[i]
+        processSpline(spline)
+        mutils.draw(points,"obj-"+str(i),spline.use_cyclic_u)        
+        
+def processSpline(spline):
+    lastbp=None
+    p=None
+    
+    for bp in spline.bezier_points:
+        p=processBezierPoints(lastbp,bp,p,spline.use_cyclic_u)
+        lastbp=bp
+  
+    if spline.use_cyclic_u:
+        p=processBezierPoints(lastbp,spline.bezier_points[0],p,True)
+              
+                    
+def processBezierPoints(bp1,bp2, p1, isclosed):    
+    if bp1==None:
+        return
+        
+    
+    if p1==None:
+        p1=Point(bp1.co.x,bp1.co.y,bp1.co.z)
+       
+    t=0    
+    
+    while t<1:    
+        t=t+0.0001
+        p2=Utils.getInterpolated(t,bp1.co,bp1.handle_right,bp2.handle_left,bp2.co)
+        distance=Utils.getDistance(p1,p2)
+  
+        if distance>MAX_DISTANCE:
+            points.append(p1)
+            p1=p2
+  
+    points.append(p1)
+        
+    if not isclosed:
+        points.append(Utils.getInterpolated(1,bp1.co,bp1.handle_right,bp2.handle_left,bp2.co))   
+                     
+    return p1
+
+
+
+print("\r\n\r\n\r\n\r\n")
+mutils=MeshesUtils()
+
+selection=bpy.context.selected_objects
+
+for i in range(len(selection)): 
+    if selection[i].type =='CURVE':
+        points.clear()
+        processCurve(selection[i])       
+        toCSharp("curve"+str(i+1))
+        
