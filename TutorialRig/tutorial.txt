@@ -1,2 +1,0 @@
-1.- create bones
-2.- para verlos pulsar en Object Data Properties > Viewport Display > InFront
