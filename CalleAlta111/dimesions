@@ -1,0 +1,39 @@
+import bpy
+import bmesh
+from math import fabs
+
+# Asegúrate de que estás en modo de edición
+bpy.ops.object.mode_set(mode = 'EDIT')
+
+# Obtén la malla de la geometría
+obj = bpy.context.edit_object
+me = obj.data
+
+# Crear un objeto BMesh y cargar la malla
+bm = bmesh.from_edit_mesh(me)
+
+# Obtén todas las aristas seleccionadas
+edges = [e for e in bm.edges if e.select]
+
+if not edges:
+    print("No se seleccionó ninguna arista.")
+else:
+    # Inicializar las variables para las coordenadas x e y
+    x_coords = []
+    y_coords = []
+
+    for edge in edges:
+        for vert in edge.verts:
+            x_coords.append(vert.co.x)
+            y_coords.append(vert.co.y)
+
+    # Calcular la diferencia entre la x mayor y la x menor, y la y mayor y la y menor
+    x = fabs(max(x_coords) - min(x_coords))
+    y = fabs(max(y_coords) - min(y_coords))
+
+    # Calcular el producto de x y y
+    product = x * y
+
+    print("La diferencia absoluta en X es: " + str(x))
+    print("La diferencia absoluta en Y es: " + str(y))
+    print("El producto de ambas es: " + str(product))
