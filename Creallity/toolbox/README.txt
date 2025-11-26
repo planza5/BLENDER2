@@ -1,0 +1,4 @@
+Creality K1C Toolbox by Rothanor on Thingiverse: https://www.thingiverse.com/thing:6686355
+
+Summary:
+This is a fully printable toolbox for some of the standard tools that come with the Creality K1C printer. This was printed in White PLA.Parts needed:1 x Upper Part1 x Bottom Part2 x Hinge Pin2 x Retaining RingPrinter parameters:Layer Height: 0.2mmInfill: 15%Supports: Only for the "Upper Part.stl"Brim: NoAfter printing, you must remove, on the bottom part, the little diagonal bridges used to sustain the overhang on the lock and the ones used to sustain the holder for the scraper, once it is installed.Bare in mind that this toolbox may not print 100% for all of you out there. There are comments saying that some of the parts broke, for that reason i've uploaded the .stp file for you to modify it as you wish. I designed this in kinda a rush and you may find the organization a little messy. Sorry :P
