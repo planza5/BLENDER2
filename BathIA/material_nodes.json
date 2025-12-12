@@ -1,0 +1,440 @@
+{
+  "material_name": "Microcemento",
+  "nodes": [
+    {
+      "name": "Texture Coordinate",
+      "type": "ShaderNodeTexCoord",
+      "location": [-2100, 700],
+      "inputs": {},
+      "outputs": [
+        {"index": 0, "name": "Generated"},
+        {"index": 1, "name": "Normal"},
+        {"index": 2, "name": "UV"},
+        {"index": 3, "name": "Object"},
+        {"index": 4, "name": "Camera"},
+        {"index": 5, "name": "Window"},
+        {"index": 6, "name": "Reflection"}
+      ],
+      "properties": {}
+    },
+    {
+      "name": "Mapping",
+      "type": "ShaderNodeMapping",
+      "location": [-1900, 700],
+      "inputs": {},
+      "outputs": [{"index": 0, "name": "Vector"}],
+      "properties": {"vector_type": "POINT"}
+    },
+    {
+      "name": "Noise Texture",
+      "type": "ShaderNodeTexNoise",
+      "location": [-1690, 700],
+      "inputs": {
+        "1": {"name": "Scale", "value": 80.0},
+        "2": {"name": "Detail", "value": 4.0},
+        "3": {"name": "Roughness", "value": 0.5}
+      },
+      "outputs": [
+        {"index": 0, "name": "Fac"},
+        {"index": 1, "name": "Color"}
+      ],
+      "properties": {"noise_dimensions": "3D"}
+    },
+    {
+      "name": "Color Ramp",
+      "type": "ShaderNodeValToRGB",
+      "location": [-1450, 740],
+      "inputs": {},
+      "outputs": [
+        {"index": 0, "name": "Color"},
+        {"index": 1, "name": "Alpha"}
+      ],
+      "properties": {
+        "color_mode": "RGB",
+        "interpolation": "LINEAR",
+        "stops": [
+          {"position": 0.48, "color": [0.58, 0.58, 0.58, 1.0]},
+          {"position": 0.52, "color": [0.65, 0.65, 0.65, 1.0]}
+        ]
+      }
+    },
+    {
+      "name": "Noise Texture.001",
+      "type": "ShaderNodeTexNoise",
+      "location": [-1690, 400],
+      "inputs": {
+        "1": {"name": "Scale", "value": 5.0},
+        "2": {"name": "Detail", "value": 2.0},
+        "3": {"name": "Roughness", "value": 0.5}
+      },
+      "outputs": [
+        {"index": 0, "name": "Fac"},
+        {"index": 1, "name": "Color"}
+      ],
+      "properties": {"noise_dimensions": "3D"}
+    },
+    {
+      "name": "Vector Math.001",
+      "type": "ShaderNodeVectorMath",
+      "location": [-1450, 380],
+      "inputs": {
+        "3": {"name": "Scale", "value": 0.03}
+      },
+      "outputs": [
+        {"index": 0, "name": "Vector"},
+        {"index": 1, "name": "Value"}
+      ],
+      "properties": {"operation": "SCALE"}
+    },
+    {
+      "name": "Vector Math.002",
+      "type": "ShaderNodeVectorMath",
+      "location": [-1270, 200],
+      "inputs": {},
+      "outputs": [
+        {"index": 0, "name": "Vector"},
+        {"index": 1, "name": "Value"}
+      ],
+      "properties": {"operation": "ADD"}
+    },
+    {
+      "name": "Wave Texture",
+      "type": "ShaderNodeTexWave",
+      "location": [-1020, 220],
+      "inputs": {
+        "1": {"name": "Scale", "value": 100.0},
+        "2": {"name": "Distortion", "value": 3.0},
+        "3": {"name": "Detail", "value": 2.0},
+        "4": {"name": "Detail Scale", "value": 1.0},
+        "5": {"name": "Detail Roughness", "value": 0.5}
+      },
+      "outputs": [
+        {"index": 0, "name": "Color"},
+        {"index": 1, "name": "Fac"}
+      ],
+      "properties": {
+        "wave_type": "BANDS",
+        "bands_direction": "X",
+        "wave_profile": "SIN"
+      }
+    },
+    {
+      "name": "Color Ramp.001",
+      "type": "ShaderNodeValToRGB",
+      "location": [-810, 320],
+      "inputs": {},
+      "outputs": [
+        {"index": 0, "name": "Color"},
+        {"index": 1, "name": "Alpha"}
+      ],
+      "properties": {
+        "color_mode": "RGB",
+        "interpolation": "LINEAR",
+        "stops": [
+          {"position": 0.40, "color": [0.0, 0.0, 0.0, 1.0]},
+          {"position": 0.60, "color": [1.0, 1.0, 1.0, 1.0]}
+        ]
+      }
+    },
+    {
+      "name": "Mix",
+      "type": "ShaderNodeMix",
+      "location": [-430, 680],
+      "inputs": {
+        "0": {"name": "Factor", "value": 0.15}
+      },
+      "outputs": [
+        {"index": 0, "name": "Result"},
+        {"index": 1, "name": "Result"},
+        {"index": 2, "name": "Result"}
+      ],
+      "properties": {
+        "data_type": "RGBA",
+        "blend_type": "OVERLAY",
+        "clamp_factor": true
+      }
+    },
+    {
+      "name": "Noise Texture.002",
+      "type": "ShaderNodeTexNoise",
+      "location": [-1680, 100],
+      "inputs": {
+        "1": {"name": "Scale", "value": 300.0},
+        "2": {"name": "Detail", "value": 8.0},
+        "3": {"name": "Roughness", "value": 0.7}
+      },
+      "outputs": [
+        {"index": 0, "name": "Fac"},
+        {"index": 1, "name": "Color"}
+      ],
+      "properties": {"noise_dimensions": "3D"}
+    },
+    {
+      "name": "Color Ramp.002",
+      "type": "ShaderNodeValToRGB",
+      "location": [-680, 30],
+      "inputs": {},
+      "outputs": [
+        {"index": 0, "name": "Color"},
+        {"index": 1, "name": "Alpha"}
+      ],
+      "properties": {
+        "color_mode": "RGB",
+        "interpolation": "LINEAR",
+        "stops": [
+          {"position": 0.85, "color": [0.0, 0.0, 0.0, 1.0]},
+          {"position": 0.90, "color": [1.0, 1.0, 1.0, 1.0]}
+        ]
+      }
+    },
+    {
+      "name": "Mix.001",
+      "type": "ShaderNodeMix",
+      "location": [-260, 340],
+      "inputs": {
+        "0": {"name": "Factor", "value": 0.03}
+      },
+      "outputs": [
+        {"index": 0, "name": "Result"},
+        {"index": 1, "name": "Result"},
+        {"index": 2, "name": "Result"}
+      ],
+      "properties": {
+        "data_type": "RGBA",
+        "blend_type": "MULTIPLY",
+        "clamp_factor": true
+      }
+    },
+    {
+      "name": "Math",
+      "type": "ShaderNodeMath",
+      "location": [-145, 10],
+      "inputs": {
+        "1": {"name": "Value", "value": 0.1}
+      },
+      "outputs": [{"index": 0, "name": "Value"}],
+      "properties": {
+        "operation": "MULTIPLY",
+        "use_clamp": false
+      }
+    },
+    {
+      "name": "Math.001",
+      "type": "ShaderNodeMath",
+      "location": [80, 10],
+      "inputs": {
+        "1": {"name": "Value", "value": 0.45}
+      },
+      "outputs": [{"index": 0, "name": "Value"}],
+      "properties": {
+        "operation": "ADD",
+        "use_clamp": false
+      }
+    },
+    {
+      "name": "Bump",
+      "type": "ShaderNodeBump",
+      "location": [385, -40],
+      "inputs": {
+        "0": {"name": "Strength", "value": 0.2},
+        "1": {"name": "Distance", "value": 0.01}
+      },
+      "outputs": [{"index": 0, "name": "Normal"}],
+      "properties": {"invert": false}
+    },
+    {
+      "name": "Principled BSDF",
+      "type": "ShaderNodeBsdfPrincipled",
+      "location": [293, 410],
+      "inputs": {},
+      "outputs": [{"index": 0, "name": "BSDF"}],
+      "properties": {}
+    },
+    {
+      "name": "Material Output",
+      "type": "ShaderNodeOutputMaterial",
+      "location": [640, 520],
+      "inputs": {},
+      "outputs": [],
+      "properties": {}
+    }
+  ],
+  "links": [
+    {
+      "from_node": "Texture Coordinate",
+      "from_socket_index": 3,
+      "from_socket_name": "Object",
+      "to_node": "Mapping",
+      "to_socket_index": 0,
+      "to_socket_name": "Vector"
+    },
+    {
+      "from_node": "Mapping",
+      "from_socket_index": 0,
+      "from_socket_name": "Vector",
+      "to_node": "Noise Texture",
+      "to_socket_index": 0,
+      "to_socket_name": "Vector"
+    },
+    {
+      "from_node": "Mapping",
+      "from_socket_index": 0,
+      "from_socket_name": "Vector",
+      "to_node": "Noise Texture.001",
+      "to_socket_index": 0,
+      "to_socket_name": "Vector"
+    },
+    {
+      "from_node": "Mapping",
+      "from_socket_index": 0,
+      "from_socket_name": "Vector",
+      "to_node": "Noise Texture.002",
+      "to_socket_index": 0,
+      "to_socket_name": "Vector"
+    },
+    {
+      "from_node": "Noise Texture",
+      "from_socket_index": 0,
+      "from_socket_name": "Fac",
+      "to_node": "Color Ramp",
+      "to_socket_index": 0,
+      "to_socket_name": "Fac"
+    },
+    {
+      "from_node": "Noise Texture",
+      "from_socket_index": 0,
+      "from_socket_name": "Fac",
+      "to_node": "Math",
+      "to_socket_index": 0,
+      "to_socket_name": "Value"
+    },
+    {
+      "from_node": "Color Ramp",
+      "from_socket_index": 0,
+      "from_socket_name": "Color",
+      "to_node": "Mix",
+      "to_socket_index": 6,
+      "to_socket_name": "A"
+    },
+    {
+      "from_node": "Noise Texture.001",
+      "from_socket_index": 1,
+      "from_socket_name": "Color",
+      "to_node": "Vector Math.001",
+      "to_socket_index": 0,
+      "to_socket_name": "Vector"
+    },
+    {
+      "from_node": "Vector Math.001",
+      "from_socket_index": 0,
+      "from_socket_name": "Vector",
+      "to_node": "Vector Math.002",
+      "to_socket_index": 0,
+      "to_socket_name": "Vector"
+    },
+    {
+      "from_node": "Mapping",
+      "from_socket_index": 0,
+      "from_socket_name": "Vector",
+      "to_node": "Vector Math.002",
+      "to_socket_index": 1,
+      "to_socket_name": "Vector"
+    },
+    {
+      "from_node": "Vector Math.002",
+      "from_socket_index": 0,
+      "from_socket_name": "Vector",
+      "to_node": "Wave Texture",
+      "to_socket_index": 0,
+      "to_socket_name": "Vector"
+    },
+    {
+      "from_node": "Wave Texture",
+      "from_socket_index": 1,
+      "from_socket_name": "Fac",
+      "to_node": "Color Ramp.001",
+      "to_socket_index": 0,
+      "to_socket_name": "Fac"
+    },
+    {
+      "from_node": "Color Ramp.001",
+      "from_socket_index": 0,
+      "from_socket_name": "Color",
+      "to_node": "Mix",
+      "to_socket_index": 7,
+      "to_socket_name": "B"
+    },
+    {
+      "from_node": "Mix",
+      "from_socket_index": 2,
+      "from_socket_name": "Result",
+      "to_node": "Mix.001",
+      "to_socket_index": 6,
+      "to_socket_name": "A"
+    },
+    {
+      "from_node": "Noise Texture.002",
+      "from_socket_index": 0,
+      "from_socket_name": "Fac",
+      "to_node": "Color Ramp.002",
+      "to_socket_index": 0,
+      "to_socket_name": "Fac"
+    },
+    {
+      "from_node": "Color Ramp.002",
+      "from_socket_index": 0,
+      "from_socket_name": "Color",
+      "to_node": "Mix.001",
+      "to_socket_index": 7,
+      "to_socket_name": "B"
+    },
+    {
+      "from_node": "Color Ramp.002",
+      "from_socket_index": 0,
+      "from_socket_name": "Color",
+      "to_node": "Bump",
+      "to_socket_index": 2,
+      "to_socket_name": "Height"
+    },
+    {
+      "from_node": "Mix.001",
+      "from_socket_index": 2,
+      "from_socket_name": "Result",
+      "to_node": "Principled BSDF",
+      "to_socket_index": 0,
+      "to_socket_name": "Base Color"
+    },
+    {
+      "from_node": "Math",
+      "from_socket_index": 0,
+      "from_socket_name": "Value",
+      "to_node": "Math.001",
+      "to_socket_index": 0,
+      "to_socket_name": "Value"
+    },
+    {
+      "from_node": "Math.001",
+      "from_socket_index": 0,
+      "from_socket_name": "Value",
+      "to_node": "Principled BSDF",
+      "to_socket_index": 2,
+      "to_socket_name": "Roughness"
+    },
+    {
+      "from_node": "Bump",
+      "from_socket_index": 0,
+      "from_socket_name": "Normal",
+      "to_node": "Principled BSDF",
+      "to_socket_index": 5,
+      "to_socket_name": "Normal"
+    },
+    {
+      "from_node": "Principled BSDF",
+      "from_socket_index": 0,
+      "from_socket_name": "BSDF",
+      "to_node": "Material Output",
+      "to_socket_index": 0,
+      "to_socket_name": "Surface"
+    }
+  ]
+}

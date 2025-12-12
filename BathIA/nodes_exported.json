@@ -1,0 +1,194 @@
+{
+  "material_name": "Material.001",
+  "nodes": [
+    {
+      "name": "Texture Coordinate",
+      "type": "ShaderNodeTexCoord",
+      "location": [
+        -1467.61474609375,
+        593.6861572265625
+      ],
+      "inputs": {},
+      "outputs": [
+        "Generated",
+        "Normal",
+        "UV",
+        "Object",
+        "Camera",
+        "Window",
+        "Reflection"
+      ],
+      "properties": {}
+    },
+    {
+      "name": "Mapping",
+      "type": "ShaderNodeMapping",
+      "location": [
+        -1225.619384765625,
+        697.8194580078125
+      ],
+      "inputs": {
+        "Location": "<Vector (0.0000, 0.0000, 0.0000)>",
+        "Rotation": "<Euler (x=0.0000, y=0.0000, z=0.0000), order='XYZ'>",
+        "Scale": "<Vector (1.0000, 1.0000, 1.0000)>"
+      },
+      "outputs": [
+        "Vector"
+      ],
+      "properties": {
+        "vector_type": "POINT"
+      }
+    },
+    {
+      "name": "Noise Texture",
+      "type": "ShaderNodeTexNoise",
+      "location": [
+        -1018.1314697265625,
+        533.2659912109375
+      ],
+      "inputs": {
+        "W": 0.0,
+        "Scale": 5.0,
+        "Detail": 2.0,
+        "Roughness": 0.5,
+        "Lacunarity": 2.0,
+        "Offset": 0.0,
+        "Gain": 1.0,
+        "Distortion": 0.0
+      },
+      "outputs": [
+        "Fac",
+        "Color"
+      ],
+      "properties": {
+        "noise_dimensions": "3D",
+        "scale": 5.0,
+        "detail": 2.0,
+        "roughness": 0.5
+      }
+    },
+    {
+      "name": "Principled BSDF",
+      "type": "ShaderNodeBsdfPrincipled",
+      "location": [
+        -788.9742431640625,
+        577.8079833984375
+      ],
+      "inputs": {
+        "Metallic": 0.0,
+        "Roughness": 0.5,
+        "IOR": 1.5,
+        "Alpha": 1.0,
+        "Normal": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "Weight": 0.0,
+        "Subsurface Weight": 0.0,
+        "Subsurface Radius": [
+          1.0,
+          0.20000000298023224,
+          0.10000000149011612
+        ],
+        "Subsurface Scale": 0.05000000074505806,
+        "Subsurface IOR": 1.399999976158142,
+        "Subsurface Anisotropy": 0.0,
+        "Specular IOR Level": 0.5,
+        "Specular Tint": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "Anisotropic": 0.0,
+        "Anisotropic Rotation": 0.0,
+        "Tangent": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "Transmission Weight": 0.0,
+        "Coat Weight": 0.0,
+        "Coat Roughness": 0.029999999329447746,
+        "Coat IOR": 1.5,
+        "Coat Tint": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "Coat Normal": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "Sheen Weight": 0.0,
+        "Sheen Roughness": 0.5,
+        "Sheen Tint": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "Emission Color": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "Emission Strength": 0.0,
+        "Thin Film Thickness": 0.0,
+        "Thin Film IOR": 1.3300000429153442
+      },
+      "outputs": [
+        "BSDF"
+      ],
+      "properties": {}
+    },
+    {
+      "name": "Material Output",
+      "type": "ShaderNodeOutputMaterial",
+      "location": [
+        -488.8041076660156,
+        443.50909423828125
+      ],
+      "inputs": {
+        "Displacement": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "Thickness": 0.0
+      },
+      "outputs": [],
+      "properties": {}
+    }
+  ],
+  "links": [
+    {
+      "from_node": "Principled BSDF",
+      "from_socket": "BSDF",
+      "to_node": "Material Output",
+      "to_socket": "Surface"
+    },
+    {
+      "from_node": "Noise Texture",
+      "from_socket": "Color",
+      "to_node": "Principled BSDF",
+      "to_socket": "Base Color"
+    },
+    {
+      "from_node": "Texture Coordinate",
+      "from_socket": "Object",
+      "to_node": "Mapping",
+      "to_socket": "Vector"
+    },
+    {
+      "from_node": "Mapping",
+      "from_socket": "Vector",
+      "to_node": "Noise Texture",
+      "to_socket": "Vector"
+    }
+  ]
+}

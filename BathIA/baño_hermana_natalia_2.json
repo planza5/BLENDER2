@@ -1,0 +1,215 @@
+{
+  "material_name": "Material.001",
+  "nodes": [
+    {
+      "name": "Principled BSDF",
+      "type": "ShaderNodeBsdfPrincipled",
+      "location": [
+        -1830.9466552734375,
+        727.2291870117188
+      ],
+      "properties": {},
+      "inputs": [
+        {
+          "index": 1,
+          "value": 0.0
+        },
+        {
+          "index": 2,
+          "value": 0.5
+        },
+        {
+          "index": 3,
+          "value": 1.5
+        },
+        {
+          "index": 4,
+          "value": 1.0
+        },
+        {
+          "index": 5,
+          "value": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "index": 6,
+          "value": 0.0
+        },
+        {
+          "index": 7,
+          "value": 0.0
+        },
+        {
+          "index": 8,
+          "value": [
+            1.0,
+            0.20000000298023224,
+            0.10000000149011612
+          ]
+        },
+        {
+          "index": 9,
+          "value": 0.05000000074505806
+        },
+        {
+          "index": 10,
+          "value": 1.399999976158142
+        },
+        {
+          "index": 11,
+          "value": 0.0
+        },
+        {
+          "index": 12,
+          "value": 0.5
+        },
+        {
+          "index": 13,
+          "value": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "index": 14,
+          "value": 0.0
+        },
+        {
+          "index": 15,
+          "value": 0.0
+        },
+        {
+          "index": 16,
+          "value": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "index": 17,
+          "value": 0.0
+        },
+        {
+          "index": 18,
+          "value": 0.0
+        },
+        {
+          "index": 19,
+          "value": 0.029999999329447746
+        },
+        {
+          "index": 20,
+          "value": 1.5
+        },
+        {
+          "index": 21,
+          "value": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "index": 22,
+          "value": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "index": 23,
+          "value": 0.0
+        },
+        {
+          "index": 24,
+          "value": 0.5
+        },
+        {
+          "index": 25,
+          "value": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "index": 26,
+          "value": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "index": 27,
+          "value": 0.0
+        },
+        {
+          "index": 28,
+          "value": 0.0
+        },
+        {
+          "index": 29,
+          "value": 1.3300000429153442
+        }
+      ]
+    },
+    {
+      "name": "Texture Coordinate",
+      "type": "ShaderNodeTexCoord",
+      "location": [
+        -2082.780517578125,
+        736.9144287109375
+      ],
+      "properties": {},
+      "inputs": []
+    },
+    {
+      "name": "Material Output",
+      "type": "ShaderNodeOutputMaterial",
+      "location": [
+        -1507.0006103515625,
+        737.55322265625
+      ],
+      "properties": {},
+      "inputs": [
+        {
+          "index": 2,
+          "value": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "index": 3,
+          "value": 0.0
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "from_node": "Principled BSDF",
+      "from_index": 0,
+      "to_node": "Material Output",
+      "to_index": 0
+    },
+    {
+      "from_node": "Texture Coordinate",
+      "from_index": 0,
+      "to_node": "Principled BSDF",
+      "to_index": 0
+    }
+  ]
+}
