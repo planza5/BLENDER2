@@ -1,0 +1,875 @@
+{
+  "id": "9db10b04-b022-4615-ac3f-6af3b65436f8",
+  "revision": 0,
+  "last_node_id": 32,
+  "last_link_id": 28,
+  "nodes": [
+    {
+      "id": 2,
+      "type": "CLIPTextEncode",
+      "pos": [
+        900,
+        50
+      ],
+      "size": [
+        400,
+        100
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 2
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            5
+          ]
+        }
+      ],
+      "title": "Positive Prompt",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.4.0",
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "seamless marble texture, natural stone surface, elegant marble with subtle grey veining, delicate veins following the sketch pattern, architectural material, high resolution texture, uniform lighting, frontal view, photorealistic, 8k quality, for 170cm wall panel"
+      ]
+    },
+    {
+      "id": 3,
+      "type": "CLIPTextEncode",
+      "pos": [
+        900,
+        200
+      ],
+      "size": [
+        400,
+        100
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 3
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            6
+          ]
+        }
+      ],
+      "title": "Negative Prompt",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.4.0",
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "blurry, low quality, jpeg artifacts, text, watermark, logo, unrealistic, repetitive pattern, oversaturated, cartoon"
+      ]
+    },
+    {
+      "id": 4,
+      "type": "EmptyLatentImage",
+      "pos": [
+        900,
+        350
+      ],
+      "size": [
+        315,
+        106
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "slot_index": 0,
+          "links": [
+            7
+          ]
+        }
+      ],
+      "title": "Output Size (2K)",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.4.0",
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        2048,
+        2048,
+        1
+      ]
+    },
+    {
+      "id": 6,
+      "type": "VAEDecode",
+      "pos": [
+        1250,
+        500
+      ],
+      "size": [
+        210,
+        46
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 8
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 4
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            9
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.4.0",
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 11,
+      "type": "CLIPVisionLoader",
+      "pos": [
+        50,
+        300
+      ],
+      "size": [
+        315,
+        58
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP_VISION",
+          "type": "CLIP_VISION",
+          "slot_index": 0,
+          "links": [
+            13
+          ]
+        }
+      ],
+      "title": "Load CLIP Vision",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.4.0",
+        "Node name for S&R": "CLIPVisionLoader"
+      },
+      "widgets_values": [
+        "CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors"
+      ]
+    },
+    {
+      "id": 10,
+      "type": "IPAdapterModelLoader",
+      "pos": [
+        50,
+        200
+      ],
+      "size": [
+        315,
+        58
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IPADAPTER",
+          "type": "IPADAPTER",
+          "slot_index": 0,
+          "links": [
+            12
+          ]
+        }
+      ],
+      "title": "Load IPAdapter",
+      "properties": {
+        "cnr_id": "comfyui_ipadapter_plus",
+        "ver": "2.0.0",
+        "Node name for S&R": "IPAdapterModelLoader"
+      },
+      "widgets_values": [
+        "ip-adapter-plus_sdxl_vit-h.safetensors"
+      ]
+    },
+    {
+      "id": 1,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        50,
+        50
+      ],
+      "size": [
+        315,
+        98
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "slot_index": 0,
+          "links": [
+            1
+          ]
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "slot_index": 1,
+          "links": [
+            2,
+            3
+          ]
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "slot_index": 2,
+          "links": [
+            4
+          ]
+        }
+      ],
+      "title": "Load SDXL Model",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.4.0",
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "SDXL/sd_xl_base_1.0.safetensors"
+      ]
+    },
+    {
+      "id": 15,
+      "type": "IPAdapterAdvanced",
+      "pos": [
+        509.9400054855804,
+        65.69000464549373
+      ],
+      "size": [
+        315,
+        278
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 1
+        },
+        {
+          "name": "ipadapter",
+          "type": "IPADAPTER",
+          "link": 12
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 26
+        },
+        {
+          "name": "image_negative",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "name": "attn_mask",
+          "shape": 7,
+          "type": "MASK",
+          "link": null
+        },
+        {
+          "name": "clip_vision",
+          "shape": 7,
+          "type": "CLIP_VISION",
+          "link": 13
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "slot_index": 0,
+          "links": [
+            15
+          ]
+        }
+      ],
+      "title": "IPAdapter (Marble Style)",
+      "properties": {
+        "cnr_id": "comfyui_ipadapter_plus",
+        "ver": "2.0.0",
+        "Node name for S&R": "IPAdapterAdvanced"
+      },
+      "widgets_values": [
+        0.8,
+        "linear",
+        "concat",
+        0,
+        1,
+        "V only"
+      ]
+    },
+    {
+      "id": 5,
+      "type": "KSampler",
+      "pos": [
+        900,
+        500
+      ],
+      "size": [
+        315,
+        262
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 15
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 18
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 19
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "slot_index": 0,
+          "links": [
+            8
+          ]
+        }
+      ],
+      "title": "Generate",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.4.0",
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        386692349741580,
+        "randomize",
+        30,
+        5,
+        "euler",
+        "normal",
+        1
+      ]
+    },
+    {
+      "id": 22,
+      "type": "LoadImagesFromFolderKJ",
+      "pos": [
+        6.217684985443824,
+        559.6503808686057
+      ],
+      "size": [
+        290.5201171875,
+        262
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            26
+          ]
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "links": null
+        },
+        {
+          "name": "count",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "image_path",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-kjnodes",
+        "ver": "557edbae16975b718672c70a50f1d35e59fc4c01",
+        "Node name for S&R": "LoadImagesFromFolderKJ"
+      },
+      "widgets_values": [
+        "/workspace/runpod-slim/files/marble-biondo",
+        1024,
+        1024,
+        "crop",
+        0,
+        0,
+        false
+      ]
+    },
+    {
+      "id": 26,
+      "type": "MaskToImage",
+      "pos": [
+        1331.3295198852143,
+        680.0480972286281
+      ],
+      "size": [
+        216.526953125,
+        26
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.4.0",
+        "Node name for S&R": "MaskToImage"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 16,
+      "type": "LoadImage",
+      "pos": [
+        -283.28995813173907,
+        932.0730767049711
+      ],
+      "size": [
+        315,
+        314.00000000000006
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            16
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "title": "Load Your Vein Drawing",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.4.0",
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "clipspace/clipspace-painted-masked-435252.png [input]",
+        "image"
+      ]
+    },
+    {
+      "id": 17,
+      "type": "ControlNetLoader",
+      "pos": [
+        253.207918865506,
+        936.7854294793591
+      ],
+      "size": [
+        315,
+        58
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CONTROL_NET",
+          "type": "CONTROL_NET",
+          "slot_index": 0,
+          "links": [
+            17
+          ]
+        }
+      ],
+      "title": "Load ControlNet Scribble",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.4.0",
+        "Node name for S&R": "ControlNetLoader"
+      },
+      "widgets_values": [
+        "SDXL/controlnet-scribble-sdxl-1.0/diffusion_pytorch_model.safetensors"
+      ]
+    },
+    {
+      "id": 18,
+      "type": "ControlNetApplyAdvanced",
+      "pos": [
+        458.80656198436964,
+        623.7554080460002
+      ],
+      "size": [
+        315,
+        186
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 5
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 6
+        },
+        {
+          "name": "control_net",
+          "type": "CONTROL_NET",
+          "link": 17
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 16
+        },
+        {
+          "name": "vae",
+          "shape": 7,
+          "type": "VAE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            18
+          ]
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "slot_index": 1,
+          "links": [
+            19
+          ]
+        }
+      ],
+      "title": "Apply ControlNet (Vein Guide)",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.4.0",
+        "Node name for S&R": "ControlNetApplyAdvanced"
+      },
+      "widgets_values": [
+        0.6,
+        0,
+        1
+      ]
+    },
+    {
+      "id": 7,
+      "type": "SaveImage",
+      "pos": [
+        1215.6324680764642,
+        745.4130021495924
+      ],
+      "size": [
+        315,
+        270
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 9
+        }
+      ],
+      "outputs": [],
+      "title": "Save Result",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.4.0",
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "marble_custom_veins"
+      ]
+    }
+  ],
+  "links": [
+    [
+      1,
+      1,
+      0,
+      15,
+      0,
+      "MODEL"
+    ],
+    [
+      2,
+      1,
+      1,
+      2,
+      0,
+      "CLIP"
+    ],
+    [
+      3,
+      1,
+      1,
+      3,
+      0,
+      "CLIP"
+    ],
+    [
+      4,
+      1,
+      2,
+      6,
+      1,
+      "VAE"
+    ],
+    [
+      5,
+      2,
+      0,
+      18,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      6,
+      3,
+      0,
+      18,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      7,
+      4,
+      0,
+      5,
+      3,
+      "LATENT"
+    ],
+    [
+      8,
+      5,
+      0,
+      6,
+      0,
+      "LATENT"
+    ],
+    [
+      9,
+      6,
+      0,
+      7,
+      0,
+      "IMAGE"
+    ],
+    [
+      12,
+      10,
+      0,
+      15,
+      1,
+      "IPADAPTER"
+    ],
+    [
+      13,
+      11,
+      0,
+      15,
+      5,
+      "CLIP_VISION"
+    ],
+    [
+      15,
+      15,
+      0,
+      5,
+      0,
+      "MODEL"
+    ],
+    [
+      16,
+      16,
+      0,
+      18,
+      3,
+      "IMAGE"
+    ],
+    [
+      17,
+      17,
+      0,
+      18,
+      2,
+      "CONTROL_NET"
+    ],
+    [
+      18,
+      18,
+      0,
+      5,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      19,
+      18,
+      1,
+      5,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      26,
+      22,
+      0,
+      15,
+      2,
+      "IMAGE"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "title": "MARBLE STYLE (from your photos)",
+      "bounding": [
+        40,
+        160,
+        400,
+        400
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 2,
+      "title": "VEIN PLACEMENT (from your drawing)",
+      "bounding": [
+        40,
+        570,
+        750,
+        470
+      ],
+      "color": "#8f563b",
+      "font_size": 24,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.7267266602182606,
+      "offset": [
+        412.2857192178542,
+        -347.9012826239373
+      ]
+    },
+    "frontendVersion": "1.30.6"
+  },
+  "version": 0.4
+}
