@@ -1,0 +1,16 @@
+SEGMENTATION MAP LEGEND
+==================================================
+
+bañera: RGB(229, 22, 22) / #e51616
+cajonera_lavabo: RGB(229, 118, 22) / #e57616
+espejo: RGB(229, 213, 22) / #e5d516
+grifo.002: RGB(150, 229, 22) / #96e516
+grifo.003: RGB(54, 229, 22) / #36e516
+lavabo.001: RGB(22, 229, 86) / #16e556
+mampara trasparente: RGB(22, 229, 181) / #16e5b5
+mampara union: RGB(22, 181, 229) / #16b5e5
+marco: RGB(22, 86, 229) / #1656e5
+pared principal: RGB(54, 22, 229) / #3616e5
+paredes textura: RGB(150, 22, 229) / #9616e5
+suelo: RGB(229, 22, 213) / #e516d5
+techo: RGB(229, 22, 118) / #e51676

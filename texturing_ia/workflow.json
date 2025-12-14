@@ -1,0 +1,148 @@
+{
+  "3": {
+    "inputs": {
+      "ckpt_name": "juggernautXL_v9.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Load Checkpoint"
+    }
+  },
+  "7": {
+    "inputs": {
+      "image": "depth (3).png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image Depth"
+    }
+  },
+  "8": {
+    "inputs": {
+      "image": "normal.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image Normals"
+    }
+  },
+  "9": {
+    "inputs": {
+      "image": "canny.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image Canny"
+    }
+  },
+  "10": {
+    "inputs": {
+      "control_net_name": "controlnet-sdxl-depth.safetensors"
+    },
+    "class_type": "ControlNetLoader",
+    "_meta": {
+      "title": "Load ControlNet Model"
+    }
+  },
+  "12": {
+    "inputs": {
+      "control_net_name": "controlnet-sdxl-normal.safetensors"
+    },
+    "class_type": "ControlNetLoader",
+    "_meta": {
+      "title": "Load ControlNet Model"
+    }
+  },
+  "13": {
+    "inputs": {
+      "control_net_name": "controlnet-sdxl-canny.safetensors"
+    },
+    "class_type": "ControlNetLoader",
+    "_meta": {
+      "title": "Load ControlNet Model"
+    }
+  },
+  "14": {
+    "inputs": {
+      "strength": 1,
+      "start_percent": 0,
+      "end_percent": 1,
+      "positive": [
+        "15",
+        0
+      ],
+      "negative": [
+        "15",
+        1
+      ],
+      "control_net": [
+        "12",
+        0
+      ],
+      "image": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "ControlNetApplyAdvanced",
+    "_meta": {
+      "title": "Apply ControlNet"
+    }
+  },
+  "15": {
+    "inputs": {
+      "strength": 1,
+      "start_percent": 0,
+      "end_percent": 1,
+      "positive": [
+        "18",
+        0
+      ],
+      "negative": [
+        "17",
+        0
+      ],
+      "control_net": [
+        "10",
+        0
+      ],
+      "image": [
+        "7",
+        0
+      ]
+    },
+    "class_type": "ControlNetApplyAdvanced",
+    "_meta": {
+      "title": "Apply ControlNet"
+    }
+  },
+  "16": {
+    "inputs": {
+      "strength": 1,
+      "start_percent": 0,
+      "end_percent": 1,
+      "positive": [
+        "14",
+        0
+      ],
+      "negative": [
+        "14",
+        1
+      ],
+      "control_net": [
+        "13",
+        0
+      ],
+      "image": [
+        "9",
+        0
+      ]
+    },
+    "class_type": "ControlNetApplyAdvanced",
+    "_meta": {
+      "title": "Apply ControlNet"
+    }
+  },
+  "17": {
+    "inputs": {
+      "text": "low resolution, blurry, soft, noise, sketch, drawing, painting, cartoon, plastic, tiling, bad design, distorted, deformed, extra fingers, watermark, signature, jpeg artifacts, ugly, cold light, fluorescent light, monochrome, grayscale, **dark colors, intense colors, rough textures, cheap materials, excessive light, overexposed, harsh light, strong internal light sources in the bathtub or shower area, too much brightness, gold faucets, bronze faucets, brass hardware, matte black faucets, copper fittings.**",
