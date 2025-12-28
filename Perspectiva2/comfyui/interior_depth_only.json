@@ -1,0 +1,360 @@
+{
+  "id": "a1b2c3d4-e5f6-47a8-b9c0-d1e2f3a4b5c6",
+  "revision": 0,
+  "last_node_id": 9,
+  "last_link_id": 11,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "CheckpointLoaderSimple",
+      "pos": [50, 50],
+      "size": [378, 159.59375],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "slot_index": 0,
+          "links": [1]
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "slot_index": 1,
+          "links": [2, 3]
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "slot_index": 2,
+          "links": [4]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.4.0",
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": ["RealVisXL_V5.0.safetensors"]
+    },
+    {
+      "id": 2,
+      "type": "LoadImage",
+      "pos": [50, 250],
+      "size": [345.65625, 406.78125],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [5]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.4.0",
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": ["interior_00000_depth.png", "image"]
+    },
+    {
+      "id": 3,
+      "type": "ControlNetLoader",
+      "pos": [450, 250],
+      "size": [378, 101.59375],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CONTROL_NET",
+          "type": "CONTROL_NET",
+          "slot_index": 0,
+          "links": [6]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.4.0",
+        "Node name for S&R": "ControlNetLoader"
+      },
+      "widgets_values": ["diffusers_xl_depth_full.safetensors"]
+    },
+    {
+      "id": 4,
+      "type": "ControlNetApplyAdvanced",
+      "pos": [450, 400],
+      "size": [378, 267.59375],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 7
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 8
+        },
+        {
+          "name": "control_net",
+          "type": "CONTROL_NET",
+          "link": 6
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 5
+        }
+      ],
+      "outputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [9]
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "slot_index": 1,
+          "links": [10]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.4.0",
+        "Node name for S&R": "ControlNetApplyAdvanced"
+      },
+      "widgets_values": [1.0, 0.0, 1.0]
+    },
+    {
+      "id": 5,
+      "type": "CLIPTextEncode",
+      "pos": [850, 50],
+      "size": [510, 246.703125],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 2
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [7]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.4.0",
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": ["modern interior living room, realistic, photorealistic, detailed textures, wooden floor, white walls, contemporary furniture, large windows with natural lighting, sofa, coffee table, plants, decorative items, high quality, 8k, architectural photography, warm atmosphere"]
+    },
+    {
+      "id": 6,
+      "type": "CLIPTextEncode",
+      "pos": [850, 350],
+      "size": [510, 227.15625],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 3
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [8]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.4.0",
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": ["blurry, low quality, cartoon, painting, sketch, unrealistic, distorted, deformed, bad geometry, wrong perspective, duplicate objects, floating objects, bad lighting, text, watermark"]
+    },
+    {
+      "id": 7,
+      "type": "EmptyLatentImage",
+      "pos": [850, 620],
+      "size": [378, 179.59375],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "slot_index": 0,
+          "links": [11]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.4.0",
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [1024, 1024, 1]
+    },
+    {
+      "id": 8,
+      "type": "KSampler",
+      "pos": [1400, 50],
+      "size": [378, 353.59375],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 1
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 9
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 10
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 11
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "slot_index": 0,
+          "links": [12]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.4.0",
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [123456789, "randomize", 20, 7.0, "dpmpp_2m", "karras", 1.0]
+    },
+    {
+      "id": 9,
+      "type": "VAEDecode",
+      "pos": [1850, 50],
+      "size": [252, 101.59375],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 12
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 4
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [13]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.4.0",
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 10,
+      "type": "SaveImage",
+      "pos": [2150, 50],
+      "size": [283.8125, 417.8125],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 13
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.4.0"
+      },
+      "widgets_values": ["interior_depth"]
+    }
+  ],
+  "links": [
+    [1, 1, 0, 8, 0, "MODEL"],
+    [2, 1, 1, 5, 0, "CLIP"],
+    [3, 1, 1, 6, 0, "CLIP"],
+    [4, 1, 2, 9, 1, "VAE"],
+    [5, 2, 0, 4, 3, "IMAGE"],
+    [6, 3, 0, 4, 2, "CONTROL_NET"],
+    [7, 5, 0, 4, 0, "CONDITIONING"],
+    [8, 6, 0, 4, 1, "CONDITIONING"],
+    [9, 4, 0, 8, 1, "CONDITIONING"],
+    [10, 4, 1, 8, 2, "CONDITIONING"],
+    [11, 7, 0, 8, 3, "LATENT"],
+    [12, 8, 0, 9, 0, "LATENT"],
+    [13, 9, 0, 10, 0, "IMAGE"]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.8,
+      "offset": [0, 0]
+    },
+    "workflowRendererVersion": "Vue",
+    "frontendVersion": "1.34.8"
+  },
+  "version": 0.4
+}

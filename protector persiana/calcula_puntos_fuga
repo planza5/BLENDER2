@@ -1,0 +1,98 @@
+import bpy
+import mathutils
+import numpy as np
+
+def get_K(scene, cam):
+    """Matriz intrínseca K en píxeles, incluyendo shift y pixel aspect."""
+    render = scene.render
+    width = render.resolution_x * render.resolution_percentage / 100.0
+    height = render.resolution_y * render.resolution_percentage / 100.0
+
+    # Pixel aspect
+    aspect_x = render.pixel_aspect_x
+    aspect_y = render.pixel_aspect_y
+    pixel_aspect = aspect_x / aspect_y
+
+    # Sensor + focal
+    camd = cam.data
+    f_mm = camd.lens
+    sensor_w = camd.sensor_width
+    sensor_h = camd.sensor_height
+    fit = camd.sensor_fit  # 'AUTO', 'HORIZONTAL', 'VERTICAL'
+
+    # Elegir dimensión de sensor según fit
+    if fit == 'VERTICAL':
+        s_u = width / sensor_w / pixel_aspect
+        s_v = height / sensor_h
+    else:
+        # AUTO lo trata parecido a HORIZONTAL según aspecto
+        # Blender típicamente usa sensor_width para horizontal.
+        s_u = width / sensor_w
+        s_v = height * pixel_aspect / sensor_h
+
+    alpha_u = f_mm * s_u
+    alpha_v = f_mm * s_v
+
+    # Centro óptico (incluye shift)
+    # Blender shift_x/y son fracciones del sensor (aprox); aquí se traducen a píxeles.
+    cx = width * (0.5 - camd.shift_x)
+    cy = height * (0.5 + camd.shift_y)
+
+    K = np.array([
+        [alpha_u, 0.0,     cx],
+        [0.0,     alpha_v, cy],
+        [0.0,     0.0,     1.0]
+    ], dtype=np.float64)
+
+    return K, width, height
+
+def world_to_camera_R(cam_obj):
+    """
+    Devuelve R_wc: rotación mundo->cámara (3x3) en convención Blender.
+    Blender cámara mira por -Z y Y es up en espacio de cámara.
+    """
+    # Matriz mundo de la cámara
+    M_cw = cam_obj.matrix_world  # cámara -> mundo
+    # Mundo -> cámara
+    M_wc = M_cw.inverted()
+    R_wc = np.array(M_wc.to_3x3(), dtype=np.float64)
+    return R_wc
+
+def vanishing_point_for_direction(K, R_wc, d_world):
+    """
+    d_world: np.array shape (3,)
+    Devuelve VP (x,y) en píxeles o None si está en el infinito (z ~ 0).
+    """
+    d_world = np.asarray(d_world, dtype=np.float64).reshape(3,)
+
+    # Dirección en coords de cámara
+    d_cam = R_wc @ d_world  # (3,)
+    v = K @ d_cam           # homogénea (3,)
+
+    # Si v[2] ~ 0 => punto de fuga en el infinito
+    if abs(v[2]) < 1e-9:
+        return None
+
+    x = v[0] / v[2]
+    y = v[1] / v[2]
+    return (float(x), float(y))
+
+def compute_vps(scene, cam_obj):
+    K, w, h = get_K(scene, cam_obj)
+    R_wc = world_to_camera_R(cam_obj)
+
+    vp_x = vanishing_point_for_direction(K, R_wc, (1,0,0))
+    vp_y = vanishing_point_for_direction(K, R_wc, (0,1,0))
+    vp_z = vanishing_point_for_direction(K, R_wc, (0,0,1))
+
+    return {"vp_x": vp_x, "vp_y": vp_y, "vp_z": vp_z, "width": w, "height": h}
+
+# --- USO ---
+scene = bpy.context.scene
+cam = scene.camera  # o bpy.data.objects['Camera']
+
+res = compute_vps(scene, cam)
+print("Resolución:", res["width"], res["height"])
+print("VPx:", res["vp_x"])
+print("VPy:", res["vp_y"])
+print("VPz:", res["vp_z"])
