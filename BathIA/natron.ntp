@@ -121,7 +121,7 @@
 				<item>
 					<Enabled>1</Enabled>
 					<HasAnimation>0</HasAnimation>
-					<Value>C:/Projects/BLENDER2/BathIA/0162.exr</Value>
+					<Value>C:/Projects/PVideoCut/BathIA/0162.exr</Value>
 					<Default></Default>
 					<HasMaster>0</HasMaster>
 					<Expression></Expression>
@@ -1247,7 +1247,7 @@
 				<item>
 					<Enabled>1</Enabled>
 					<HasAnimation>0</HasAnimation>
-					<Value>C:/Projects/BLENDER2/BathIA/0162.exr</Value>
+					<Value>C:/Projects/PVideoCut/BathIA/0162.exr</Value>
 					<Default></Default>
 					<HasMaster>0</HasMaster>
 					<Expression></Expression>
@@ -1646,7 +1646,7 @@
 		<item>
 			<Enabled>1</Enabled>
 			<HasAnimation>0</HasAnimation>
-			<Value>&lt;Name&gt;OCIO&lt;/Name&gt;&lt;Value&gt;C:/Program Files/Natron/Resources/OpenColorIO-Configs/blender&lt;/Value&gt;&lt;Name&gt;Project&lt;/Name&gt;&lt;Value&gt;C:/Projects/BLENDER2/BathIA&lt;/Value&gt;</Value>
+			<Value>&lt;Name&gt;OCIO&lt;/Name&gt;&lt;Value&gt;C:/Program Files/Natron/Resources/OpenColorIO-Configs/blender&lt;/Value&gt;&lt;Name&gt;Project&lt;/Name&gt;&lt;Value&gt;C:/Projects/PVideoCut/BathIA&lt;/Value&gt;</Value>
 			<Default></Default>
 			<HasMaster>0</HasMaster>
 			<Expression></Expression>
