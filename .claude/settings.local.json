@@ -1,7 +1,13 @@
 {
   "permissions": {
     "allow": [
-      "Bash(move:*)"
+      "Bash(move:*)",
+      "Bash(git push:*)",
+      "Bash(git pull:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nCambios en erikaroom\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git checkout:*)",
+      "Bash(git commit:*)"
     ]
   }
 }
